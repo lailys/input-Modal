@@ -8,9 +8,10 @@ class ModalTop extends Component {
       color: "#1d9bea",
     }
     this.style = {
-      position: "absolute",
-      top: "0",
-      left: "0",
+      // background: "yellow",
+      // position: "absolute",
+      // top: "0",
+      // left: "0",
       width: "4vmin",
       height: " 4vmin",
       borderRadius: "50%",
@@ -35,7 +36,7 @@ class ModalTop extends Component {
               x2="25"
               y2="25"
               stroke={color}
-              strokeWidth="2.5"
+              strokeWidth="2.6"
               strokeLinecap="round"
               strokeMiterlimit="10"
             ></line>
@@ -45,7 +46,7 @@ class ModalTop extends Component {
               x2="15"
               y2="25"
               stroke={color}
-              strokeWidth="2.5"
+              strokeWidth="2.6"
               strokeLinecap="round"
               strokeMiterlimit="10"
             ></line>
@@ -63,7 +64,7 @@ const Container = styled.div`
   border-radius: 25px 25px 0 0;
   border-bottom: solid 1px #bcbcbc;
   width: 100%;
-  height: 7vmin;
+  height: 6vmin;
 `
 const CloseModalBtn = styled.button`
   background: white;
@@ -76,7 +77,8 @@ const CloseModalBtn = styled.button`
   border-radius: 50%;
   border: none;
   width: 4vmin;
-  height: 4vmin;
+  height: auto;
+  min-height: 4vmin;
   &:hover {
     background: #1d9bea3b;
   }

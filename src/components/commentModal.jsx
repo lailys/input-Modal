@@ -1,19 +1,23 @@
 import React, { Component } from "react"
 import styled from "styled-components"
+import PropTypes from "prop-types"
 import ModalTop from "./modalTop"
-import ModalMiddle from "./modalMiddle"
 import ModalBottom from "./modalBottom"
 
 class CommentModal extends Component {
   render() {
+    const { mainComment, mainReply } = this.props
     return (
       <Container>
         <ModalTop />
-        {/* <ModalMiddle />
-        <ModalBottom /> */}
+        <ModalBottom mainComment={mainComment} mainReply={mainReply} />
       </Container>
     )
   }
+}
+CommentModal.propTypes = {
+  mainComment: PropTypes.object,
+  mainReply: PropTypes.object,
 }
 const Container = styled.div`
   color: black;
@@ -24,12 +28,11 @@ const Container = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   border-radius: 25px;
-  // border: solid 1px #bcbcbc;
   -webkit-box-shadow: 3px 7px 24px 9px rgba(199, 199, 199, 0.48);
   box-shadow: 3px 7px 24px 9px rgba(199, 199, 199, 0.48);
   width: 60vmin;
   height: auto;
-  min-height: 50vmin;
+  min-height: 41vmin;
 `
 
 export default CommentModal

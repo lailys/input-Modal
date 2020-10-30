@@ -2,12 +2,14 @@ import React from "react"
 import { createGlobalStyle } from "styled-components"
 import ErrorBoundary from "../components/errorBoundary"
 import CommentModal from "../components/commentModal"
+import { comment, reply } from "../../helper/info"
 
 function IndexPage() {
+  console.log(comment)
   return (
     <ErrorBoundary>
       <GlobalStyle />
-      <CommentModal />
+      <CommentModal mainComment={comment} mainReply={reply} />
     </ErrorBoundary>
   )
 }
