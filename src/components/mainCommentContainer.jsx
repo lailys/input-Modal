@@ -74,7 +74,7 @@ const MainCommentWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-left: solid 2px #3d5566;
+  border-left: solid 2px #bcbcbc;
   width: 56.2vmin;
   height: auto;
   min-height: 12.2vmin;
