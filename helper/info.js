@@ -3,8 +3,10 @@ const comment = {
     name: 'Alan',
     avatar: 'https://images.pexels.com/photos/733767/pexels-photo-733767.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
   },
-  commentMsg: 'Gatsby is a React-based open source framework for creating websites and apps. Build anything you can imagine with over 2000 plugins and performance, scalability, and security built-in by default......',
-  createdOn: '1603920749182'
+  commentMsg: 'https://www.youtube.com/watch?v=dvorpyrTI2g&app=desktop',
+  createdOn: '1603920749182',
+  images: [],
+  gif: "",
 }
 const reply = {
   replyOwner: {

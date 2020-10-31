@@ -3,17 +3,29 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 
 function MediaContainer(props) {
-  const { media, text, removeMedia } = props
+  const { media, text, removeMedia, video, mainMediaContainer } = props
+  console.log(video, ">>>>>>>??????????::::")
   return (
-    <Container>
+    <Container mainMediaContainer={mainMediaContainer}>
       {" "}
       {Array.isArray(media) && media.length > 0 ? (
         media.map((img, i) => (
           <EachImg key={i} id={i}>
-            <RemoveBtn onClick={e => removeMedia(e, i)}> x </RemoveBtn>{" "}
+            {!mainMediaContainer ? (
+              <RemoveBtn onClick={e => removeMedia(e, i)}> x </RemoveBtn>
+            ) : (
+              <></>
+            )}{" "}
             <Image src={img} />{" "}
           </EachImg>
         ))
+      ) : Array.isArray(media) && media.length < 1 && video !== "" ? (
+        <Video
+          src={video}
+          frameborder="0"
+          allowfullscreen
+          mainMediaContainer={mainMediaContainer}
+        />
       ) : (
         <></>
       )}
@@ -24,17 +36,19 @@ function MediaContainer(props) {
 MediaContainer.propTypes = {
   media: PropTypes.array,
   removeMedia: PropTypes.func,
+  video: PropTypes.string,
+  mainMediaContainer: PropTypes.bool,
 }
 const Container = styled.div`
   // background: pink;
-  margin: 0;
+  margin: ${props => (props.mainMediaContainer ? "0" : "0 0 0 4vmin")};
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   border-radius: 2px;
-  width: 56.2vmin;
-  max-height: 12vmin;
+  width: 48.5vmin;
+  max-height: 20vmin;
   min-height: 0;
   height: auto;
 `
@@ -78,5 +92,13 @@ const Image = styled.img`
   border-radius: 5px;
   width: 80%;
   height: 80%;
+`
+const Video = styled.iframe`
+  margin: ${props => (props.mainMediaContainer ? "0" : "0 0 0 6vmin")};
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  width: 46.2vmin;
+  height: 20vmin;
 `
 export default MediaContainer

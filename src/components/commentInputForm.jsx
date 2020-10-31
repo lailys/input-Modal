@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 import FormTextInput from "./formTextInput"
 import FormBtnInput from "./formBtnInput"
 import Form from "./form"
+import { getVideoLinks } from "../../helper/helpers"
 import MediaContainer from "./mediaContainer"
 
 class CommentInputForm extends Component {
@@ -13,6 +14,7 @@ class CommentInputForm extends Component {
       text: "",
       images: [],
       gif: "",
+      video: "",
       imgPicker: false,
       emojiPickerOpened: false,
       gifPickerOpened: false,
@@ -44,14 +46,18 @@ class CommentInputForm extends Component {
     }
   }
   addTxtComment(text) {
-    console.log(text, "text.......")
+    console.log(text, "text.....++++++..", getVideoLinks(text))
     try {
-      this.setState({
-        text,
-        emojiPickerOpened: false,
-        gifPickerOpened: false,
-        imgPicker: false,
-      })
+      this.setState(
+        {
+          video: getVideoLinks(text),
+          text,
+          emojiPickerOpened: false,
+          gifPickerOpened: false,
+          imgPicker: false,
+        },
+        () => console.log(this.state.video, "this.state.video...........")
+      )
     } catch (error) {
       console.log(
         error,
@@ -200,6 +206,7 @@ class CommentInputForm extends Component {
       text,
       images,
       gif,
+      video,
       gifLocked,
       imgLocked,
     } = this.state
@@ -210,8 +217,10 @@ class CommentInputForm extends Component {
         </ReplyCommentAvatar>
         <FormTextInput addTxtComment={addTxtComment} text={text} />
         <MediaContainer
+          video={video}
           media={gif !== "" ? [gif] : images}
           text={text}
+          mainMediaContainer={false}
           removeMedia={removeMedia}
         />
         <FormBtnInput

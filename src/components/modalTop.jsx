@@ -8,10 +8,6 @@ class ModalTop extends Component {
       color: "#1d9bea",
     }
     this.style = {
-      // background: "yellow",
-      // position: "absolute",
-      // top: "0",
-      // left: "0",
       width: "4vmin",
       height: " 4vmin",
       borderRadius: "50%",

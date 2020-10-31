@@ -2,10 +2,15 @@ import React, { Component } from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import { getTimeFormat } from "../../helper/helpers"
+import { createTextLinks } from "../../helper/helpers"
+import { getVideoLinks } from "../../helper/helpers"
+import ReactHtmlParser from "react-html-parser"
+import MediaContainer from "./mediaContainer"
 
 class MainCommentContainer extends Component {
   render() {
     const { mainComment } = this.props
+
     return (
       <Container>
         <MainCommentWrapper>
@@ -17,7 +22,16 @@ class MainCommentContainer extends Component {
               {getTimeFormat(mainComment.createdOn)}
             </MainCommentDate>
           </MainCommentinfo>
-          <MainCommentMsg>{mainComment.commentMsg}</MainCommentMsg>
+          <MainCommentMsg>
+            {ReactHtmlParser(createTextLinks(mainComment.commentMsg))}
+          </MainCommentMsg>
+          <MediaContainer
+            video={getVideoLinks(mainComment.commentMsg)}
+            media={
+              mainComment.gif !== "" ? [mainComment.gif] : mainComment.images
+            }
+            mainMediaContainer={true}
+          />
         </MainCommentWrapper>
         <MainCommentAvatar>
           <Img src={mainComment.commentOwner.avatar}></Img>
@@ -72,7 +86,7 @@ const MainCommentWrapper = styled.div`
   padding: 0 0 1.5vmin 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   border-left: solid 2px #bcbcbc;
   width: 56.2vmin;
@@ -80,7 +94,7 @@ const MainCommentWrapper = styled.div`
   min-height: 12.2vmin;
 `
 const MainCommentinfo = styled.div`
-  background: white;
+  // background: pink;
   margin: 0 0 0 2vmin;
   padding: 0;
   display: flex;
@@ -121,6 +135,7 @@ const MainCommentDate = styled.span`
 `
 const MainCommentMsg = styled.div`
   background: white;
+  // background: pink;
   color: #1e1e1e;
   font-family: "Roboto", sans-serif;
   font-size: 90%;
@@ -130,6 +145,8 @@ const MainCommentMsg = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  word-break: break-all;
+  white-space: normal;
   flex-wrap: wrap;
   width: 50vmin;
   height: auto;

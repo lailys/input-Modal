@@ -7,6 +7,7 @@ import PropTypes from "prop-types"
 
 const Form = ({ children, gift, text, images, submitComment }) => {
   //This is the place for modify client OnSubmit
+
   return (
     <FormContainer onSubmit={e => submitComment()}>{children}</FormContainer>
   )
