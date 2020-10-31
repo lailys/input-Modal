@@ -17,20 +17,29 @@ const FormBtnInput = props => {
     emojiPickerOpened,
     gifPickerOpened,
     imgPicker,
+    gifLocked,
+    imgLocked,
   } = props
   return (
     <Container>
       <MediaBtnContainer>
-        <BtnContainer onClick={e => openPicker("img")}>
+        <BtnContainer onClick={e => openPicker("img")} active={!imgLocked}>
           {" "}
           <Image />
-          <ImgInputBtn type="file" onChange={e => addImgComment(e)} />
+          <ImgInputBtn
+            type="file"
+            active={!imgLocked}
+            onChange={e => addImgComment(e)}
+          />
         </BtnContainer>
-        <BtnContainer onClick={e => openPicker("gif")}>
+        <BtnContainer
+          onClick={e => (!gifLocked ? openPicker("gif") : null)}
+          active={!gifLocked}
+        >
           {" "}
           <Gif />
         </BtnContainer>
-        <BtnContainer onClick={e => openPicker("emoji")}>
+        <BtnContainer onClick={e => openPicker("emoji")} active={true}>
           {" "}
           <Emoji />
         </BtnContainer>
@@ -54,7 +63,7 @@ const FormBtnInput = props => {
         </EmojiModalWrapper>{" "}
       </MediaBtnContainer>
       <ReplyBtnContainer>
-        <RplBtn>Reply</RplBtn>
+        <RplBtn type="submit">Reply</RplBtn>
       </ReplyBtnContainer>
     </Container>
   )
@@ -97,16 +106,17 @@ const MediaBtnContainer = styled.div`
   }
 `
 const BtnContainer = styled.div`
-  // background: green;
+  background: ${props => (props.active ? "none" : "#6e6f705e")};
   margin: 0;
   padding: 0.8vmin;
+  text-align: center;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
   width: 4vmin;
   height: 4vmin;
   &:hover {
-    background: #1da0f22d;
+    background: ${props => (props.active ? "#1da0f22d" : "#6e6f705e")};
   }
 `
 const ReplyBtnContainer = styled.div`
@@ -144,7 +154,7 @@ const ImgInputBtn = styled.input`
   // background: red;
   margin: 0;
   padding: 0;
-  display: flex;
+  display: ${props => (props.active ? "flex" : "none")};
   align-items: center;
   justify-content: center;
   position: absolute;

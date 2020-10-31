@@ -6,6 +6,7 @@ function FormTextInput(props) {
   const { addTxtComment } = props
   return (
     <TextArea
+      id="editable-comment-area"
       contentEditable
       suppressContentEditableWarning={true}
       data-placeholder="Type your reply..."
