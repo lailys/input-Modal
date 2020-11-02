@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import FormTextInput from "./formTextInput"
 import FormBtnInput from "./formBtnInput"
 import Form from "./form"
-import { getVideoLinks } from "../../helper/helpers"
+import { getVideoLinks, getmedia } from "../../helper/helpers"
 import MediaContainer from "./mediaContainer"
 
 class CommentInputForm extends Component {
@@ -12,7 +12,7 @@ class CommentInputForm extends Component {
     super()
     this.state = {
       text: "",
-      images: [],
+      images: "",
       gif: "",
       video: "",
       imgPicker: false,
@@ -46,7 +46,6 @@ class CommentInputForm extends Component {
     }
   }
   addTxtComment(text) {
-    console.log(text, "text.....++++++..", getVideoLinks(text))
     try {
       this.setState(
         {
@@ -70,21 +69,13 @@ class CommentInputForm extends Component {
     try {
       this.setState({
         images:
-          this.state.gif === "" &&
-          Array.isArray(this.state.images) &&
-          this.state.images.length < 6
-            ? [...this.state.images, URL.createObjectURL(img.target.files[0])]
-            : [...this.state.images],
+          this.state.gif === "" && this.state.images === ""
+            ? URL.createObjectURL(img.target.files[0])
+            : "",
         gifLocked:
-          this.state.gif === "" &&
-          Array.isArray(this.state.images) &&
-          this.state.images.length < 5
-            ? true
-            : false,
+          this.state.gif === "" && this.state.images === "" ? true : false,
         imgLocked:
-          Array.isArray(this.state.images) && this.state.images.length < 5
-            ? false
-            : true,
+          this.state.gif === "" && this.state.images === "" ? true : false,
         emojiPickerOpened: false,
         gifPickerOpened: false,
         imgPicker: false,
@@ -100,19 +91,11 @@ class CommentInputForm extends Component {
     console.log(gif, "Gif.......")
     try {
       this.setState({
-        gif:
-          Array.isArray(this.state.images) &&
-          this.state.images.length < 1 &&
-          this.state.gif === ""
-            ? gif
-            : "",
+        gif: this.state.images === "" && this.state.gif === "" ? gif : "",
         imgLocked:
-          gif !== "" &&
-          Array.isArray(this.state.images) &&
-          this.state.images.length < 1
-            ? true
-            : false,
-        gifLocked: gif !== "" ? true : false,
+          this.state.images === "" && this.state.gif === "" ? true : false,
+        gifLocked:
+          this.state.images === "" && this.state.gif === "" ? true : false,
         emojiPickerOpened: false,
         gifPickerOpened: false,
         imgPicker: false,
@@ -151,7 +134,7 @@ class CommentInputForm extends Component {
       this.setState(
         {
           text: "",
-          images: [],
+          images: "",
           gif: "",
           emojiPickerOpened: false,
           gifPickerOpened: false,
@@ -169,16 +152,14 @@ class CommentInputForm extends Component {
       )
     }
   }
-  removeMedia = (e, i) => {
+  removeMedia = e => {
     e.preventDefault()
+    console.log(e)
     try {
       this.setState({
         gif: "",
-        images: this.state.images.filter((img, j) => i !== j),
-        gifLocked:
-          Array.isArray(this.state.images) && this.state.images.length > 1
-            ? true
-            : false,
+        images: "",
+        gifLocked: false,
         imgLocked: false,
       })
     } catch (error) {
@@ -190,12 +171,13 @@ class CommentInputForm extends Component {
   }
 
   render() {
-    const { mainReply } = this.props
+    const { mainReply, handleSubmit } = this.props
     const {
       addTxtComment,
       addEmojiComment,
       addGifComment,
       addImgComment,
+      openPicker,
       removeMedia,
       submitComment,
     } = this
@@ -211,20 +193,23 @@ class CommentInputForm extends Component {
       imgLocked,
     } = this.state
     return (
-      <Form text={text} images={images} git={gif} submitComment={submitComment}>
+      <Form text={text} media={getmedia(gif, images)}>
         <ReplyCommentAvatar>
           <Img src={mainReply.replyOwner.avatar}></Img>
         </ReplyCommentAvatar>
         <FormTextInput addTxtComment={addTxtComment} text={text} />
         <MediaContainer
           video={video}
-          media={gif !== "" ? [gif] : images}
+          media={getmedia(gif, images)}
           text={text}
           mainMediaContainer={false}
           removeMedia={removeMedia}
         />
         <FormBtnInput
-          openPicker={this.openPicker}
+          handleSubmit={handleSubmit}
+          media={getmedia(gif, images)}
+          openPicker={openPicker}
+          submitComment={submitComment}
           addEmojiComment={addEmojiComment}
           addGifComment={addGifComment}
           addImgComment={addImgComment}
@@ -233,6 +218,7 @@ class CommentInputForm extends Component {
           imgPicker={imgPicker}
           gifLocked={gifLocked}
           imgLocked={imgLocked}
+          text={text}
         />
       </Form>
     )

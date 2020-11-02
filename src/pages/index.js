@@ -5,13 +5,19 @@ import CommentModal from "../components/commentModal"
 import { comment, reply } from "../../helper/info"
 
 function IndexPage() {
-  console.log(comment)
   return (
     <ErrorBoundary>
       <GlobalStyle />
-      <CommentModal mainComment={comment} mainReply={reply} />
+      <CommentModal
+        mainComment={comment}
+        mainReply={reply}
+        handleSubmit={handleSubmit}
+      />
     </ErrorBoundary>
   )
+}
+const handleSubmit = newComment => {
+  console.log(newComment, "final data of a submition of the modal")
 }
 const GlobalStyle = createGlobalStyle`
   body,html {

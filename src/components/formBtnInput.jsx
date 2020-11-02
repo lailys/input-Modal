@@ -10,7 +10,10 @@ import Emoji from "../../assets/happy.inline.svg"
 
 const FormBtnInput = props => {
   const {
+    media,
     openPicker,
+    handleSubmit,
+    submitComment,
     addEmojiComment,
     addGifComment,
     addImgComment,
@@ -19,6 +22,7 @@ const FormBtnInput = props => {
     imgPicker,
     gifLocked,
     imgLocked,
+    text,
   } = props
   return (
     <Container>
@@ -63,12 +67,26 @@ const FormBtnInput = props => {
         </EmojiModalWrapper>{" "}
       </MediaBtnContainer>
       <ReplyBtnContainer>
-        <RplBtn type="submit">Reply</RplBtn>
+        <RplBtn
+          onClick={e => {
+            submitComment()
+            handleSubmit({
+              commentMsg: text,
+              inputMIMEInfo: media[0] ? media[0] : "",
+            })
+          }}
+        >
+          Reply
+        </RplBtn>
       </ReplyBtnContainer>
     </Container>
   )
 }
 FormBtnInput.propTypes = {
+  text: PropTypes.string,
+  media: PropTypes.array,
+  handleSubmit: PropTypes.func,
+  submitComment: PropTypes.func,
   openPicker: PropTypes.func,
   addEmojiComment: PropTypes.func,
   addGifComment: PropTypes.func,

@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 function MediaContainer(props) {
   const { media, text, removeMedia, video, mainMediaContainer } = props
-  console.log(video, ">>>>>>>??????????::::")
+  console.log(media, "..........")
   return (
     <Container mainMediaContainer={mainMediaContainer}>
       {" "}
@@ -12,7 +12,7 @@ function MediaContainer(props) {
         media.map((img, i) => (
           <EachImg key={i} id={i}>
             {!mainMediaContainer ? (
-              <RemoveBtn onClick={e => removeMedia(e, i)}> x </RemoveBtn>
+              <RemoveBtn onClick={e => removeMedia(e)}> x </RemoveBtn>
             ) : (
               <></>
             )}{" "}
@@ -35,8 +35,8 @@ function MediaContainer(props) {
 
 MediaContainer.propTypes = {
   media: PropTypes.array,
-  removeMedia: PropTypes.func,
   video: PropTypes.string,
+  removeMedia: PropTypes.func,
   mainMediaContainer: PropTypes.bool,
 }
 const Container = styled.div`

@@ -22,18 +22,6 @@ function FormTextInput(props) {
           )
         }
       }}
-      // onKeyDown={e => {
-      //   try {
-      //     if (e.target.innerText.length > 200) {
-      //       e.preventDefault()
-      //     }
-      //   } catch (error) {
-      //     console.log(
-      //       error,
-      //       "This is the error from onKeyDown method in FormTextInput component"
-      //     )
-      //   }
-      // }}
     />
   )
 }

@@ -1,6 +1,11 @@
 /* eslint-disable */
 import moment from "moment"
 
+export const getmedia = (gif, image) => {
+  if (gif !== "") return [gif]
+  if (image !== "") return [image]
+  return []
+}
 export const createTextLinks = text => {
   return (text || "").replace(
     /(https?:\/\/)?[\w\-~]+(\.[\w\-~]+)+(\/[\w\-~@:%]*)*(#[\w\-]*)?(\?[^\s]*)?/gi,

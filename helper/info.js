@@ -5,8 +5,7 @@ const comment = {
   },
   commentMsg: 'https://www.youtube.com/watch?v=dvorpyrTI2g&app=desktop',
   createdOn: '1603920749182',
-  images: [],
-  gif: "",
+  inputMIMEInfo: "",
 }
 const reply = {
   replyOwner: {

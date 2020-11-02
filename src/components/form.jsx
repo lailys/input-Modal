@@ -5,19 +5,13 @@ import PropTypes from "prop-types"
 // import { useMutation } from "@apollo/client"
 // import { CREATE_COMMENT, GET_COMMENTS_LIST } from "../queries/AllQueries"
 
-const Form = ({ children, gift, text, images, submitComment }) => {
+const Form = ({ children }) => {
   //This is the place for modify client OnSubmit
 
-  return (
-    <FormContainer onSubmit={e => submitComment()}>{children}</FormContainer>
-  )
+  return <FormContainer>{children}</FormContainer>
 }
 Form.propTypes = {
   children: PropTypes.node.isRequired,
-  submitComment: PropTypes.func,
-  text: PropTypes.string,
-  gif: PropTypes.string,
-  images: PropTypes.array,
 }
 const FormContainer = styled.form`
   // background: purple;

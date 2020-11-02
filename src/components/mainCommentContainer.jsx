@@ -28,7 +28,9 @@ class MainCommentContainer extends Component {
           <MediaContainer
             video={getVideoLinks(mainComment.commentMsg)}
             media={
-              mainComment.gif !== "" ? [mainComment.gif] : mainComment.images
+              mainComment.inputMIMEInfo !== ""
+                ? [mainComment.inputMIMEInfo]
+                : []
             }
             mainMediaContainer={true}
           />

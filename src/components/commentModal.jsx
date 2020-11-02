@@ -6,19 +6,25 @@ import ModalBottom from "./modalBottom"
 
 class CommentModal extends Component {
   render() {
-    const { mainComment, mainReply } = this.props
+    const { mainComment, mainReply, handleSubmit } = this.props
     return (
       <Container>
         <ModalTop />
-        <ModalBottom mainComment={mainComment} mainReply={mainReply} />
+        <ModalBottom
+          mainComment={mainComment}
+          mainReply={mainReply}
+          handleSubmit={handleSubmit}
+        />
       </Container>
     )
   }
 }
 CommentModal.propTypes = {
+  handleSubmit: PropTypes.func,
   mainComment: PropTypes.object,
   mainReply: PropTypes.object,
 }
+
 const Container = styled.div`
   color: black;
   margin: 0;

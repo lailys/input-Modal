@@ -6,16 +6,17 @@ import CommentInputForm from "./commentInputForm"
 
 class ModalBottom extends Component {
   render() {
-    const { mainComment, mainReply } = this.props
+    const { mainComment, mainReply, handleSubmit } = this.props
     return (
       <Container>
         <MainCommentContainer mainComment={mainComment} />
-        <CommentInputForm mainReply={mainReply} />
+        <CommentInputForm mainReply={mainReply} handleSubmit={handleSubmit} />
       </Container>
     )
   }
 }
 ModalBottom.propTypes = {
+  handleSubmit: PropTypes.func,
   mainComment: PropTypes.object,
   mainReply: PropTypes.object,
 }
