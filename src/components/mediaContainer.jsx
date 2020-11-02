@@ -94,7 +94,7 @@ const Image = styled.img`
   height: 80%;
 `
 const Video = styled.iframe`
-  margin: ${props => (props.mainMediaContainer ? "0" : "0 0 0 6vmin")};
+  margin: 0;
   padding: 0;
   border: none;
   border-radius: 5px;
